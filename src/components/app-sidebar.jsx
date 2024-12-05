@@ -12,7 +12,7 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+} from "lucide-react";
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -52,41 +52,45 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "书籍内容",
+      url: "/",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "总览",
+          url: "/overview",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "动机",
+          url: "/motivation",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "学习力",
+          url: "/learning",
+        },
+        {
+          title: "创造力",
+          url: "/creativity",
+        },
+        {
+          title: "心流",
+          url: "/flow",
         },
       ],
     },
     {
-      title: "Models",
+      title: "日程",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "AI 对话",
+          url: "/chat",
         },
         {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "日程",
+          url: "/schedule",
         },
       ],
     },
@@ -119,16 +123,16 @@ const data = {
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Prompt",
+          url: "/ai/prompt",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "AI History",
+          url: "/ai/history",
         },
         {
-          title: "Billing",
-          url: "#",
+          title: "AI Playground",
+          url: "/ai/playground",
         },
         {
           title: "Limits",
@@ -154,7 +158,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({
   ...props
