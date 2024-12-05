@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 在这里添加你的数据模型 
+model AiHistory {
+  id        String   @id @default(uuid())
+  promptKey String?
+  prompt    String?
+  content   String?
+  imageUrl  String?
+  response  String?
+  model     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Prompt {
+  id            String   @id @default(uuid())
+  name          String // Prompt 名称
+  promptContent String // Prompt 具体内容
+  promptType    String   @default("dynamic") // static 或 dynamic，默认 dynamic
+  llm           String?  @default("") // LLM 模型
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
