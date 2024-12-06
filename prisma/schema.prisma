@@ -25,7 +25,7 @@ model AiHistory {
 
 model Prompt {
   id            String   @id @default(uuid())
-  name          String // Prompt 名称
+  name          String   @unique // Prompt 名称
   promptContent String // Prompt 具体内容
   promptType    String   @default("dynamic") // static 或 dynamic，默认 dynamic
   llm           String?  @default("") // LLM 模型

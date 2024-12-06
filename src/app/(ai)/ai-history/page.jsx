@@ -1,7 +1,6 @@
 "use client";
 
 import { useRequest } from 'ahooks';
-import { RefreshCcw, Search } from "lucide-react";
 import Image from 'next/image';
 import { useState } from "react";
 
@@ -12,16 +11,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { DataTable } from "@/components/ui/data-table";
 
 export default function AIHistoryPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,11 +20,7 @@ export default function AIHistoryPage() {
   const pageSize = 10;
   const [selectedRecord, setSelectedRecord] = useState(null);
 
-  const {
-    data,
-    loading,
-    refresh,
-  } = useRequest(
+  const { data: historyData, loading, refresh } = useRequest(
     async () => {
       const res = await fetch(`/api/crud?model=aiHistory&action=read&page=${currentPage}&pageSize=${pageSize}&searchTerm=${searchTerm}`);
       return res.json();
@@ -65,57 +52,19 @@ export default function AIHistoryPage() {
     },
   ];
 
-  const handleSearch = (value) => {
-    setSearchTerm(value);
-    setCurrentPage(1);
-  };
-
   return (
     <div className="container mx-auto p-4">
       <h1 className="mb-4 text-2xl font-bold">AI历史记录</h1>
-      <div className="mb-4 flex space-x-2">
-        <div className="relative flex w-[200px] items-center">
-          <Search className="absolute left-2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="搜索..."
-            className="pl-8"
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-        </div>
-        <Button variant="outline" onClick={() => void refresh()}>
-          <RefreshCcw className="mr-2 h-4 w-4" />
-          刷新
-        </Button>
-      </div>
 
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {columns.map((column) => (
-                <TableHead key={column.accessorKey ?? column.id}>
-                  {column.header}
-                </TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {(data?.list ?? []).map((row) => (
-              <TableRow key={row.id}>
-                {columns.map((column) => (
-                  <TableCell key={column.accessorKey ?? column.id}>
-                    {column.cell
-                      ? column.cell({ row: { original: row } })
-                      : column.accessorKey
-                        ? String(row[column.accessorKey])
-                        : null}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <DataTable
+        columns={columns}
+        data={historyData?.data?.list ?? []}
+        searchKey="promptKey"
+        onSearch={setSearchTerm}
+        onRefresh={refresh}
+        loading={loading}
+        pageSize={pageSize}
+      />
 
       <Dialog
         open={!!selectedRecord}

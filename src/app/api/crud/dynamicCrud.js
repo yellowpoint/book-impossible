@@ -11,16 +11,20 @@ export async function dynamicCrud(req) {
   const pageSize = parseInt(params.pageSize || "10");
   const searchTerm = params.searchTerm || "";
   const id = params.id;
+  const data = params.data;
 
   if (!model || !action) {
-    return NextResponse.json(
-      { error: "Missing model or action parameter" },
-      { status: 400 }
-    );
+    return NextResponse.json({
+      code: 1,
+      data: "Missing model or action parameter"
+    }, { status: 400 });
   }
 
   if (!(model in prisma)) {
-    return NextResponse.json({ error: "Invalid model" }, { status: 400 });
+    return NextResponse.json({
+      code: 1,
+      data: "Invalid model"
+    }, { status: 400 });
   }
 
   const prismaModel = prisma[model];
@@ -28,12 +32,11 @@ export async function dynamicCrud(req) {
   try {
     switch (action) {
       case "create":
-        const createData = await req.json();
         const createdItem = await prismaModel.create({
-          data: processRelationalData(createData, "create"),
+          data: processRelationalData(data, "create"),
           include: getIncludeObject(prismaModel),
         });
-        return NextResponse.json(createdItem);
+        return NextResponse.json({ code: 0, data: createdItem });
 
       case "read":
         if (id) {
@@ -41,7 +44,7 @@ export async function dynamicCrud(req) {
             where: { id },
             include: getIncludeObject(prismaModel),
           });
-          return NextResponse.json(item);
+          return NextResponse.json({ code: 0, data: item });
         } else {
           const where = searchTerm
             ? {
@@ -66,47 +69,52 @@ export async function dynamicCrud(req) {
           ]);
 
           return NextResponse.json({
-            list,
-            total,
-            page,
-            pageSize,
+            code: 0,
+            data: {
+              list,
+              total,
+              page,
+              pageSize,
+            }
           });
         }
 
       case "update":
         if (!id) {
-          return NextResponse.json(
-            { error: "Missing id for update" },
-            { status: 400 }
-          );
+          return NextResponse.json({
+            code: 1,
+            data: "Missing id for update"
+          }, { status: 400 });
         }
-        const updateData = await req.json();
         const updatedItem = await prismaModel.update({
           where: { id },
-          data: processRelationalData(updateData, "update"),
+          data: processRelationalData(data, "update"),
           include: getIncludeObject(prismaModel),
         });
-        return NextResponse.json(updatedItem);
+        return NextResponse.json({ code: 0, data: updatedItem });
 
       case "delete":
         if (!id) {
-          return NextResponse.json(
-            { error: "Missing id for delete" },
-            { status: 400 }
-          );
+          return NextResponse.json({
+            code: 1,
+            data: "Missing id for delete"
+          }, { status: 400 });
         }
         const deletedItem = await prismaModel.delete({ where: { id } });
-        return NextResponse.json(deletedItem);
+        return NextResponse.json({ code: 0, data: deletedItem });
 
       default:
-        return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+        return NextResponse.json({
+          code: 1,
+          data: "Invalid action"
+        }, { status: 400 });
     }
   } catch (error) {
     console.error(`Error in ${action} operation for ${model}:`, error);
-    return NextResponse.json(
-      { error: `Failed to ${action} ${model}: ${error.message}` },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      code: 1,
+      data: `Failed to ${action} ${model}: ${error.message}`
+    }, { status: 500 });
   }
 }
 
@@ -201,5 +209,5 @@ function getListSelectObject(modelName) {
   return selectObject;
 }
 
-// select 精确指定要返回的字段，包括关系字段；默认不返回任何字段，必须明确指定要返���的字段
+// select 精确指定要返回的字段，包括关系字段；默认不返回任何字段，必须明确指定要返回的字段
 // include 默认返回所有标量字段，只能选择是否加载整个关系

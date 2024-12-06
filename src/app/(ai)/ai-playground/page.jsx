@@ -38,8 +38,12 @@ export default function LLMPlayground() {
   const { loading: promptsLoading } = useRequest(
     () => fetch("/api/crud?model=prompt&action=read").then((res) => res.json()),
     {
-      onSuccess: (data) => {
-        setPrompts(data.list);
+      onSuccess: (result) => {
+        if (result.code === 0) {
+          setPrompts(result.data.list);
+        } else {
+          console.error("Failed to load prompts:", result.data);
+        }
       },
     },
   );
