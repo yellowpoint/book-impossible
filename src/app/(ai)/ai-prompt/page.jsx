@@ -1,7 +1,7 @@
 "use client";
 
 import { useRequest } from "ahooks";
-import { Plus, RefreshCcw, Search } from "lucide-react";
+import { Plus, RefreshCcw, Search, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -17,14 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { DataTable } from "@/components/ui/data-table";
 import { Textarea } from "@/components/ui/textarea";
 import { AVAILABLE_MODELS, DEFAULT_MODEL } from "@/app/(ai)/providers";
 import {
@@ -34,10 +27,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function AIPromptPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isCreateDrawerOpen, setIsCreateDrawerOpen] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
 
   const form = useForm({
     defaultValues: {
@@ -88,8 +88,84 @@ export default function AIPromptPage() {
     }
   );
 
+  const { run: updatePrompt, loading: updating } = useRequest(
+    (data) =>
+      fetch("/api/crud", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "prompt",
+          action: "update",
+          data,
+        }),
+      }).then((res) => res.json()),
+    {
+      manual: true,
+      onSuccess: (result) => {
+        if (result.code === 0) {
+          toast.success("更新成功");
+          setIsCreateDrawerOpen(false);
+          setEditingRecord(null);
+          form.reset();
+          refresh();
+        } else {
+          toast.error(result.message || "更新失败");
+        }
+      },
+      onError: (error) => {
+        toast.error("更新失败");
+        console.error(error);
+      },
+    }
+  );
+
   const handleSubmit = (values) => {
-    createPrompt(values);
+    if (editingRecord) {
+      updatePrompt({ ...values, id: editingRecord.id });
+    } else {
+      createPrompt(values);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch("/api/crud", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "prompt",
+          action: "delete",
+          data: { id },
+        }),
+      });
+      const result = await res.json();
+      if (result.code === 0) {
+        toast.success("删除成功");
+        refresh();
+      } else {
+        toast.error(result.message || "删除失败");
+      }
+    } catch (error) {
+      toast.error("删除失败");
+      console.error(error);
+    }
+  };
+
+  const handleEdit = (record) => {
+    setEditingRecord(record);
+    form.reset({
+      name: record.name,
+      promptContent: record.promptContent,
+      promptType: record.promptType,
+      llm: record.llm,
+    });
+    setIsCreateDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsCreateDrawerOpen(false);
+    setEditingRecord(null);
+    form.reset();
   };
 
   const columns = [
@@ -101,60 +177,57 @@ export default function AIPromptPage() {
       header: "创建时间",
       cell: ({ row }) => new Date(row.original.createdAt).toLocaleString(),
     },
+    {
+      id: "actions",
+      header: "操作",
+      cell: ({ row }) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => handleEdit(row.original)}>
+              编辑
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => handleDelete(row.original.id)}
+              className="text-red-600"
+            >
+              删除
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
   ];
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="mb-4 text-2xl font-bold">AI Prompt管理</h1>
 
-      <div className="mb-4 flex space-x-2">
-        <div className="relative flex w-[200px] items-center">
-          <Search className="absolute left-2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="搜索..."
-            className="pl-8"
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <Button variant="outline" onClick={() => void refresh()}>
-          <RefreshCcw className="mr-2 h-4 w-4" />
-          刷新
-        </Button>
+      <div className="mb-4 flex items-center justify-between">
+
         <Button onClick={() => setIsCreateDrawerOpen(true)}>
           <Plus className="mr-2 h-4 w-4" />
           新建
         </Button>
       </div>
 
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {columns.map((column) => (
-                <TableHead key={column.accessorKey}>{column.header}</TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {(promptData?.data?.list ?? []).map((row) => (
-              <TableRow key={row.id}>
-                {columns.map((column) => (
-                  <TableCell key={column.accessorKey}>
-                    {column.cell
-                      ? column.cell({ row: { original: row } })
-                      : row[column.accessorKey]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <DataTable
+        columns={columns}
+        data={promptData?.data?.list ?? []}
+        searchKey="name"
+        onSearch={setSearchTerm}
+        onRefresh={refresh}
+        loading={loading}
+      />
 
-      <Sheet open={isCreateDrawerOpen} onOpenChange={setIsCreateDrawerOpen}>
+      <Sheet open={isCreateDrawerOpen} onOpenChange={handleDrawerClose}>
         <SheetContent className="w-[400px] sm:w-[540px]">
           <SheetHeader>
-            <SheetTitle>新建 Prompt</SheetTitle>
+            <SheetTitle>{editingRecord ? "编辑" : "新建"} Prompt</SheetTitle>
           </SheetHeader>
           <div className="mt-4">
             <Form {...form}>
@@ -187,7 +260,7 @@ export default function AIPromptPage() {
                       <FormControl>
                         <Textarea
                           {...field}
-                          placeholder="输入Prompt内容"
+                          placeholder="输���Prompt内容"
                           className="min-h-[200px]"
                         />
                       </FormControl>
@@ -249,8 +322,12 @@ export default function AIPromptPage() {
                   )}
                 />
 
-                <Button type="submit" className="w-full" disabled={creating}>
-                  {creating ? "创建中..." : "创建"}
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={creating || updating}
+                >
+                  {creating || updating ? "提交中..." : (editingRecord ? "更新" : "创建")}
                 </Button>
               </form>
             </Form>

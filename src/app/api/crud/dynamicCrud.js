@@ -10,8 +10,9 @@ export async function dynamicCrud(req) {
   const page = parseInt(params.page || "1");
   const pageSize = parseInt(params.pageSize || "10");
   const searchTerm = params.searchTerm || "";
-  const id = params.id;
   const data = params.data;
+
+  const id = params.id || data?.id;
 
   if (!model || !action) {
     return NextResponse.json({
