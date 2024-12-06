@@ -1,12 +1,13 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["next/core-web-vitals"],
   "plugins": ["import"],
   "rules": {
     "import/no-unresolved": "error",
     "import/named": "error",
     "import/default": "error",
     "import/namespace": "error",
-    "import/no-unused-modules": "error"
+    "import/no-unused-modules": "error",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
   },
   "settings": {
     "import/resolver": {

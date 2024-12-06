@@ -124,15 +124,15 @@ const data = {
       items: [
         {
           title: "Prompt",
-          url: "/ai/prompt",
+          url: "/ai-prompt",
         },
         {
           title: "AI History",
-          url: "/ai/history",
+          url: "/ai-history",
         },
         {
           title: "AI Playground",
-          url: "/ai/playground",
+          url: "/ai-playground",
         },
         {
           title: "Limits",

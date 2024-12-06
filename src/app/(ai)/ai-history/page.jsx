@@ -1,6 +1,8 @@
 "use client";
 
+import { useRequest } from 'ahooks';
 import { RefreshCcw, Search } from "lucide-react";
+import Image from 'next/image';
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -10,7 +12,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Image } from "@/components/ui/image";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -21,7 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { api } from "@/trpc/react";
 
 export default function AIHistoryPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,13 +31,17 @@ export default function AIHistoryPage() {
 
   const {
     data,
-    isLoading: loading,
-    refetch: refresh,
-  } = api.aiHistory.list.useQuery({
-    page: currentPage,
-    pageSize,
-    searchTerm,
-  });
+    loading,
+    refresh,
+  } = useRequest(
+    async () => {
+      const res = await fetch(`/api/crud?model=aiHistory&action=read&page=${currentPage}&pageSize=${pageSize}&searchTerm=${searchTerm}`);
+      return res.json();
+    },
+    {
+      refreshDeps: [currentPage, searchTerm],
+    }
+  );
 
   const columns = [
     { accessorKey: "promptKey", header: "提示词关键字" },

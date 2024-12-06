@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { AVAILABLE_MODELS, DEFAULT_MODEL } from "../api/llm/providers";
+import { AVAILABLE_MODELS, DEFAULT_MODEL } from "@/app/(ai)/providers";
 
 export default function LLMPlayground() {
   const form = useForm({
@@ -46,7 +46,7 @@ export default function LLMPlayground() {
 
   const { run: callLLM, loading: llmLoading } = useRequest(
     (params) =>
-      fetch("/api/llm", {
+      fetch("/api/ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(params),
