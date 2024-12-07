@@ -101,6 +101,10 @@ const data = {
       icon: SquareTerminal,
       items: [
         {
+          title: "AI 对话",
+          url: "/ai-chat",
+        },
+        {
           title: "AI Prompt",
           url: "/ai-prompt",
         },

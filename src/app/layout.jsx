@@ -31,8 +31,10 @@ export default function RootLayout({ children }) {
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <Header />
-            {children}
+            <Header className="h-16" />
+            <main className="h-[calc(100vh-4rem)]">
+              {children}
+            </main>
             <Toaster />
           </SidebarInset>
         </SidebarProvider>
