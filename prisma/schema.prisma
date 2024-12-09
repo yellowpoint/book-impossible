@@ -32,3 +32,22 @@ model Prompt {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+model Document {
+  id        String   @id @default(uuid())
+  name      String
+  type      String // 文档类型(pdf, doc等)
+  chunks    Chunk[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Chunk {
+  id         String   @id @default(uuid())
+  content    String
+  embedding  Bytes // 存储向量嵌入
+  document   Document @relation(fields: [documentId], references: [id])
+  documentId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

@@ -1,9 +1,10 @@
 "use client";
 
 import { useChat } from "ai/react";
-import { Bot, Send, User } from "lucide-react";
+import { Bot, Send, User, Upload } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
+import { useState } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -13,12 +14,40 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { DEFAULT_MODEL } from "@/app/(ai)/providers";
 
 export default function AIChatPage() {
+  const [documents, setDocuments] = useState([]);
   const scrollAreaRef = useRef(null);
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/api/upload-doc", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setDocuments(prev => [...prev, data.document]);
+        toast.success("文档上传成功");
+      } else {
+        toast.error("文档上传失败");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("文档上传失败");
+    }
+  };
+
   const {
     messages,
     input,
     handleInputChange,
-    handleSubmit,
+    handleSubmit: originalHandleSubmit,
     isLoading,
     error,
     reload,
@@ -28,6 +57,7 @@ export default function AIChatPage() {
     initialMessages: [],
     body: {
       model: DEFAULT_MODEL,
+      documentIds: documents.map(d => d.id)
     },
     onResponse: (response) => {
       if (!response.ok) {
@@ -51,11 +81,54 @@ export default function AIChatPage() {
     experimental_throttle: 50,
   });
 
+  // 包装handleSubmit以清理input
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    await originalHandleSubmit(e);
+  };
+
   return (
     <div className="h-full flex flex-col">
-      <h1 className="text-2xl font-bold p-4">AI 对话</h1>
+      <div className="flex items-center justify-between p-4">
+        <h1 className="text-2xl font-bold">AI 对话</h1>
 
-      <Card className="flex-1 m-4 mt-0 flex flex-col overflow-hidden">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => document.getElementById("file-upload").click()}
+          >
+            <Upload size={16} />
+            上传文档
+          </Button>
+          <input
+            id="file-upload"
+            type="file"
+            className="hidden"
+            accept=".pdf,.doc,.docx,.txt"
+            onChange={handleFileUpload}
+          />
+        </div>
+      </div>
+
+      {/* 显示已上传文档 */}
+      {documents.length > 0 && (
+        <div className="px-4 pb-2">
+          <p className="text-sm text-muted-foreground">已上传文档:</p>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {documents.map(doc => (
+              <div key={doc.id} className="text-xs bg-muted px-2 py-1 rounded">
+                {doc.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <Card className="flex-1 mx-4 mb-4 flex flex-col overflow-hidden">
         <ScrollArea ref={scrollAreaRef} className="flex-1">
           <div className="flex flex-col gap-4 p-4">
             {messages.map((message) => {
