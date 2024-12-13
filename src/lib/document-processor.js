@@ -33,27 +33,28 @@ function splitIntoChunks(text, maxChunkSize = 1000) {
     .map(s => s.trim())
     .filter(s => s.length > 0);
 
-  const chunks = [];
+  const chunks = sentences;
   let currentChunk = '';
+  console.log(sentences);
+  // for (const sentence of sentences) {
+  //   // 如果当前chunk加上新句子的长度超过maxChunkSize
+  //   // 且currentChunk不为空,则保存当前chunk并开始新的chunk
+  //   if (currentChunk && (currentChunk.length + sentence.length > maxChunkSize)) {
+  //     chunks.push(currentChunk);
+  //     currentChunk = sentence;
+  //   } else {
+  //     // 否则将句子添加到当前chunk
+  //     currentChunk = currentChunk
+  //       ? `${currentChunk}。${sentence}`
+  //       : sentence;
+  //   }
+  // }
 
-  for (const sentence of sentences) {
-    // 如果当前chunk加上新句子的长度超过maxChunkSize
-    // 且currentChunk不为空,则保存当前chunk并开始新的chunk
-    if (currentChunk && (currentChunk.length + sentence.length > maxChunkSize)) {
-      chunks.push(currentChunk);
-      currentChunk = sentence;
-    } else {
-      // 否则将句子添加到当前chunk
-      currentChunk = currentChunk
-        ? `${currentChunk}。${sentence}`
-        : sentence;
-    }
-  }
-
-  // 添加最后一个chunk
-  if (currentChunk) {
-    chunks.push(currentChunk);
-  }
+  // // 添加最后一个chunk
+  // if (currentChunk) {
+  //   chunks.push(currentChunk);
+  // }
+  console.log(chunks);
 
   return chunks;
 }
