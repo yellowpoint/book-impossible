@@ -75,7 +75,7 @@ const data = {
           url: "/creativity",
         },
         {
-          title: "��流",
+          title: "心流",
           url: "/flow",
         },
       ],

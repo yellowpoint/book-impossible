@@ -260,7 +260,7 @@ export default function AIPromptPage() {
                       <FormControl>
                         <Textarea
                           {...field}
-                          placeholder="输���Prompt内容"
+                          placeholder="输入Prompt内容"
                           className="min-h-[200px]"
                         />
                       </FormControl>
