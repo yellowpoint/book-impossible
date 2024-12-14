@@ -86,12 +86,12 @@ const data = {
       icon: Bot,
       items: [
         {
-          title: "AI 对话",
-          url: "/chat",
+          title: "日待办",
+          url: "/schedule",
         },
         {
-          title: "日程",
-          url: "/schedule",
+          title: "周待办",
+          url: "/schedule/week",
         },
       ],
     },
