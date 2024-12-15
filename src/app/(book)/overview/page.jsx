@@ -67,7 +67,7 @@ export default function OverviewPage() {
         能力关系概览
       </motion.h1>
 
-      <div className="relative mx-auto mt-8 flex aspect-square w-full max-w-2xl items-center justify-center">
+      <div className="relative mx-auto flex  w-full max-w-2xl items-center justify-center">
         <div className="relative h-[500px] w-[500px]">
           {/* 调整 SVG 尺寸 */}
           <svg
