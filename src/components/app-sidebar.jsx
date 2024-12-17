@@ -12,6 +12,15 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
+  Home,
+  Zap,
+  Brain,
+  Sparkles,
+  Activity,
+  MessageSquare,
+  Wand2,
+  History,
+  Gamepad2,
 } from "lucide-react";
 import { usePathname } from "next/navigation"
 
@@ -28,7 +37,7 @@ import {
 } from "@/components/ui/sidebar"
 
 // This is sample data.
-const data = {
+export const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
@@ -53,30 +62,32 @@ const data = {
   ],
   navMain: [
     {
-      title: "书籍内容",
-      url: "/",
-      icon: BookOpen,
-      isActive: true,
+      title: "书籍",
       items: [
         {
           title: "总览",
           url: "/overview",
+          icon: Home,
         },
         {
           title: "动机",
           url: "/motivation",
+          icon: Zap,
         },
         {
           title: "学习力",
           url: "/learning",
+          icon: Brain,
         },
         {
           title: "创造力",
           url: "/creativity",
+          icon: Sparkles,
         },
         {
           title: "心流",
           url: "/flow",
+          icon: Activity,
         },
       ],
     },
@@ -97,27 +108,30 @@ const data = {
     },
     {
       title: "AI",
-      url: "#",
-      icon: SquareTerminal,
       items: [
         {
           title: "AI 对话",
           url: "/ai-chat",
+          icon: MessageSquare,
         },
         {
           title: "AI Prompt",
           url: "/ai-prompt",
+          icon: Wand2,
         },
         {
           title: "AI History",
           url: "/ai-history",
+          icon: History,
         },
         {
           title: "AI Playground",
           url: "/ai-playground",
+          icon: Gamepad2,
         },
       ],
     },
+
   ],
   projects: [
     {
