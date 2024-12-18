@@ -2,6 +2,7 @@
   "name": "demo-js",
   "version": "0.1.0",
   "private": true,
+  "url": "https://github.com/yellowpoint/book-impossible.git",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

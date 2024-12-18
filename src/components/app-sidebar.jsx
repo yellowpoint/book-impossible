@@ -10,6 +10,7 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
+  Calendar,
   Settings2,
   SquareTerminal,
   Home,
@@ -63,6 +64,7 @@ export const data = {
   navMain: [
     {
       title: "书籍",
+      icon: BookOpen,
       items: [
         {
           title: "总览",
@@ -94,7 +96,7 @@ export const data = {
     {
       title: "日程",
       url: "#",
-      icon: Bot,
+      icon: Calendar,
       items: [
         {
           title: "日待办",
@@ -108,6 +110,7 @@ export const data = {
     },
     {
       title: "AI",
+      icon: Bot,
       items: [
         {
           title: "AI 对话",
