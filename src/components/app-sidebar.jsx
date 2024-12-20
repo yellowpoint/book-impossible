@@ -22,6 +22,8 @@ import {
   Wand2,
   History,
   Gamepad2,
+  MoreHorizontal,
+  Briefcase,
 } from "lucide-react";
 import { usePathname } from "next/navigation"
 
@@ -134,7 +136,17 @@ export const data = {
         },
       ],
     },
-
+    {
+      title: "其他",
+      icon: MoreHorizontal,
+      items: [
+        {
+          title: "有意义的工作",
+          url: "/meaningful-work",
+          icon: Briefcase,
+        },
+      ],
+    },
   ],
   projects: [
     {
