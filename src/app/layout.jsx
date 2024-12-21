@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
+import { CozeScript } from "@/components/coze-script"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
             <Toaster />
           </SidebarInset>
         </SidebarProvider>
+        <CozeScript />
       </body>
     </html>
   );
