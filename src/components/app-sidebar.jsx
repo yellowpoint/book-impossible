@@ -24,6 +24,8 @@ import {
   Gamepad2,
   MoreHorizontal,
   Briefcase,
+  Target,
+  Heart,
 } from "lucide-react";
 import { usePathname } from "next/navigation"
 
@@ -147,6 +149,22 @@ export const data = {
         },
       ],
     },
+    {
+      title: "目标",
+      icon: Target,
+      items: [
+        {
+          title: "学习助手",
+          url: "/goals/learning-assistant",
+          icon: Bot,
+        },
+        {
+          title: "心流快乐",
+          url: "/goals/flow-happiness",
+          icon: Heart,
+        }
+      ]
+    }
   ],
   projects: [
     {
