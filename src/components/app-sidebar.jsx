@@ -138,17 +138,7 @@ export const data = {
         },
       ],
     },
-    {
-      title: "其他",
-      icon: MoreHorizontal,
-      items: [
-        {
-          title: "有意义的工作",
-          url: "/meaningful-work",
-          icon: Briefcase,
-        },
-      ],
-    },
+
     {
       title: "目标",
       icon: Target,
@@ -164,7 +154,23 @@ export const data = {
           icon: Heart,
         }
       ]
-    }
+    },
+    {
+      title: "其他",
+      icon: MoreHorizontal,
+      items: [
+        {
+          title: "有意义的工作",
+          url: "/meaningful-work",
+          icon: Briefcase,
+        },
+        {
+          title: "快乐系统",
+          url: "/happiness",
+          icon: Heart,
+        },
+      ],
+    },
   ],
   projects: [
     {
