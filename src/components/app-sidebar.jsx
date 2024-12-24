@@ -89,12 +89,23 @@ export const data = {
           title: "创造力",
           url: "/creativity",
           icon: Sparkles,
+        }
+      ],
+    },
+    {
+      title: "心流",
+      icon: Activity,
+      items: [
+        {
+          title: "总览",
+          url: "/flow",
+          icon: Home,
         },
         {
-          title: "心流",
-          url: "/flow",
-          icon: Activity,
-        },
+          title: "为什么不快乐",
+          url: "/flow/why-not-happy",
+          icon: Heart,
+        }
       ],
     },
     {
