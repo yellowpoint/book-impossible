@@ -67,7 +67,7 @@ export const data = {
   ],
   navMain: [
     {
-      title: "书籍",
+      title: "跨域不可能",
       icon: BookOpen,
       items: [
         {
@@ -92,22 +92,7 @@ export const data = {
         }
       ],
     },
-    {
-      title: "心流",
-      icon: Activity,
-      items: [
-        {
-          title: "总览",
-          url: "/flow",
-          icon: Home,
-        },
-        {
-          title: "为什么不快乐",
-          url: "/flow/why-not-happy",
-          icon: Heart,
-        }
-      ],
-    },
+
     {
       title: "日程",
       url: "#",
@@ -122,6 +107,23 @@ export const data = {
           url: "/schedule/week",
         },
       ],
+    },
+
+    {
+      title: "目标",
+      icon: Target,
+      items: [
+        {
+          title: "学习助手",
+          url: "/goals/learning-assistant",
+          icon: Bot,
+        },
+        {
+          title: "心流快乐",
+          url: "/goals/flow-happiness",
+          icon: Heart,
+        }
+      ]
     },
     {
       title: "AI",
@@ -149,22 +151,21 @@ export const data = {
         },
       ],
     },
-
     {
-      title: "目标",
-      icon: Target,
+      title: "心流",
+      icon: Activity,
       items: [
         {
-          title: "学习助手",
-          url: "/goals/learning-assistant",
-          icon: Bot,
+          title: "为什么不快乐",
+          url: "/flow/why-not-happy",
+          icon: Heart,
         },
         {
-          title: "心流快乐",
-          url: "/goals/flow-happiness",
-          icon: Heart,
+          title: "控制意识",
+          url: "/flow/consciousness",
+          icon: Brain,
         }
-      ]
+      ],
     },
     {
       title: "其他",
