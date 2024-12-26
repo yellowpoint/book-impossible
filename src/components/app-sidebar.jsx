@@ -164,7 +164,17 @@ export const data = {
           title: "控制意识",
           url: "/flow/consciousness",
           icon: Brain,
-        }
+        },
+        {
+          title: "心流要素",
+          url: "/flow/flow-elements",
+          icon: Brain,
+        },
+        {
+          title: "如何找目标",
+          url: "/flow/find-target",
+          icon: Target,
+        },
       ],
     },
     {
