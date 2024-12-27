@@ -26,6 +26,7 @@ import {
   Briefcase,
   Target,
   Heart,
+  Leaf,
 } from "lucide-react";
 import { usePathname } from "next/navigation"
 
@@ -191,6 +192,11 @@ export const data = {
           url: "/happiness",
           icon: Heart,
         },
+        {
+          title: "人生不必太用力",
+          url: "/flow/not-too-hard",
+          icon: Leaf,
+        }
       ],
     },
   ],
