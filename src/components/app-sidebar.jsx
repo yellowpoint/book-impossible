@@ -90,6 +90,11 @@ export const data = {
           title: "创造力",
           url: "/creativity",
           icon: Sparkles,
+        },
+        {
+          title: "心流",
+          url: "/flow",
+          icon: Activity,
         }
       ],
     },
