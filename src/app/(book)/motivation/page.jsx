@@ -21,6 +21,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Textarea } from "@/components/ui/textarea"
 
 const chemicals = [
   {
@@ -245,8 +246,8 @@ export default function MotivationPage() {
             <button
               onClick={() => setSelectedType("external")}
               className={`rounded-lg px-4 py-2 transition-colors ${selectedType === "external"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary"
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary"
                 }`}
             >
               外在驱动
@@ -254,8 +255,8 @@ export default function MotivationPage() {
             <button
               onClick={() => setSelectedType("internal")}
               className={`rounded-lg px-4 py-2 transition-colors ${selectedType === "internal"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary"
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary"
                 }`}
             >
               内在驱动
@@ -344,7 +345,7 @@ export default function MotivationPage() {
               <p className="text-sm text-muted-foreground">
                 {step.description}
               </p>
-              <textarea
+              <Textarea
                 className="min-h-[100px] w-full rounded-lg border bg-background p-3 text-sm"
                 placeholder={step.inputPlaceholder}
                 value={curiosityInputs[step.title] ?? ""}
@@ -383,7 +384,7 @@ export default function MotivationPage() {
               <p className="text-sm text-muted-foreground">
                 {step.description}
               </p>
-              <textarea
+              <Textarea
                 className="min-h-[100px] w-full rounded-lg border bg-background p-3 text-sm"
                 placeholder={step.inputPlaceholder}
                 value={passionMissionInputs[step.title] ?? ""}
