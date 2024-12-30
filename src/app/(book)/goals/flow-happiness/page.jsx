@@ -107,8 +107,8 @@ export default function FlowHappinessPage() {
         className="mt-8 p-4 rounded-lg bg-muted"
       >
         <p className="text-sm text-muted-foreground italic">
-          提示：目标设定要遵循"大目标优于小目标"原则，同时保持挑战与技能的平衡，
-          这样更容易进入心流状态，获得持续的快乐体验。
+          {`提示：目标设定要遵循"大目标优于小目标"原则，同时保持挑战与技能的平衡，
+          这样更容易进入心流状态，获得持续的快乐体验。`}
         </p>
       </motion.div>
     </div>
