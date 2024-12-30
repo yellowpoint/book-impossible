@@ -45,40 +45,38 @@ body {
   }
 
   .dark {
-    --background: 25 100% 27%; /* #8B4513 */
-    --foreground: 0 0% 100%; /* #FFFFFF */
+    --background: 30 20% 10%; /* 深褐色背景 */
+    --foreground: 30 15% 90%; /* 浅褐色文字 */
 
-    --card: 25 100% 27%; /* #8B4513 */
-    --card-foreground: 0 0% 100%; /* #FFFFFF */
+    --card: 30 20% 12%;
+    --card-foreground: 30 15% 90%;
+    --popover: 30 20% 12%;
+    --popover-foreground: 30 15% 90%;
 
-    --popover: 25 100% 27%; /* #8B4513 */
-    --popover-foreground: 0 0% 100%; /* #FFFFFF */
+    --primary: 25 90% 60%; /* 明亮的橙色 */
+    --primary-foreground: 0 0% 100%;
 
-    --primary: 16 100% 65%; /* #FF7F50 */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --secondary: 25 30% 25%;
+    --secondary-foreground: 25 90% 60%;
 
-    --secondary: 16 67% 54%; /* #dd6236 */
-    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+    --muted: 25 30% 25%;
+    --muted-foreground: 30 15% 70%;
 
-    --muted: 16 67% 54%; /* #dd6236 */
-    --muted-foreground: 0 0% 90%; /* 提高对比度,使文字更清晰可见 */
-
-    --accent: 20 47% 61%; /* #cb936b */
-    --accent-foreground: 25 100% 27%; /* #8B4513 */
+    --accent: 35 80% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 16 100% 28%; /* #8f1e00 */
-    --input: 16 100% 28%; /* #8f1e00 */
-    --ring: 16 100% 65%; /* #FF7F50 */
+    --border: 30 20% 20%;
+    --input: 30 20% 20%;
+    --ring: 25 90% 60%;
 
-    /* Chart colors - dark mode */
-    --chart-1: 16 100% 65%; /* #FF7F50 */
-    --chart-2: 37 100% 80%; /* #ffd299 */
-    --chart-3: 16 67% 54%; /* #dd6236 */
-    --chart-4: 16 100% 28%; /* #8f1e00 */
-    --chart-5: 25 100% 27%; /* #8B4513 */
+    --chart-1: 25 90% 60%; /* 明亮的橙色 */
+    --chart-2: 35 80% 50%; /* 金色 */
+    --chart-3: 15 70% 50%; /* 深橙色 */
+    --chart-4: 45 70% 50%; /* 琥珀色 */
+    --chart-5: 30 15% 90%; /* 浅褐色 */
   }
 }
 

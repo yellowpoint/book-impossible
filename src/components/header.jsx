@@ -12,6 +12,10 @@ import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import React from 'react';
 import { data as sidebarData } from '@/components/app-sidebar';
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 // 从导航数据生成面包屑映射
 const generateBreadcrumbsMap = () => {
@@ -55,13 +59,14 @@ function getBreadcrumbs(path) {
   return breadcrumbs;
 }
 
-export function Header() {
+export function Header({ className }) {
+  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const breadcrumbs = getBreadcrumbs(pathname);
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-      <div className="flex items-center gap-2 px-4">
+    <header className={cn("flex h-16 shrink-0 items-center gap-2 border-b bg-background px-6 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12", className)}>
+      <div className="flex flex-1 items-center gap-2">
         <SidebarTrigger className="-ml-1" />
         <Separator orientation="vertical" className="mr-2 h-4" />
         <Breadcrumb>
@@ -90,6 +95,17 @@ export function Header() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
+
+      {/* 主题切换按钮 */}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      >
+        <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <span className="sr-only">切换主题</span>
+      </Button>
     </header>
   );
 } 

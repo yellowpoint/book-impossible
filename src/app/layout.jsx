@@ -5,6 +5,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import { CozeScript } from "@/components/coze-script"
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,21 +36,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <Header className="h-16" />
-            <main className="h-[calc(100vh-4rem)]">
-              {children}
-            </main>
-            <Toaster />
-          </SidebarInset>
-        </SidebarProvider>
-        <CozeScript />
+    <html lang="zh-CN" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <Header className="h-16" />
+              <main className="h-[calc(100vh-4rem)]">
+                {children}
+              </main>
+              <Toaster />
+            </SidebarInset>
+          </SidebarProvider>
+          <CozeScript />
+        </ThemeProvider>
       </body>
     </html>
   );
