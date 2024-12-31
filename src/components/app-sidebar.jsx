@@ -27,6 +27,7 @@ import {
   Target,
   Heart,
   Leaf,
+  Compass,
 } from "lucide-react";
 import { usePathname } from "next/navigation"
 
@@ -162,6 +163,11 @@ export const data = {
       icon: Activity,
       items: [
         {
+          title: "心流系统",
+          url: "/flow/overview",
+          icon: Target,
+        },
+        {
           title: "为什么不快乐",
           url: "/flow/why-not-happy",
           icon: Heart,
@@ -174,12 +180,12 @@ export const data = {
         {
           title: "心流要素",
           url: "/flow/flow-elements",
-          icon: Brain,
+          icon: Target,
         },
         {
           title: "如何找目标",
           url: "/flow/find-target",
-          icon: Target,
+          icon: Compass,
         },
       ],
     },
