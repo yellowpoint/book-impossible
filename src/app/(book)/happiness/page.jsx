@@ -166,6 +166,46 @@ const placeholders = {
   ],
 };
 
+const happinessAttitudes = {
+  title: "今天你要选择什么样的快乐？",
+  description: "每一天，我们都在做出关于快乐的选择。重要的不是选择什么，而是如何看待这个选择。",
+  attitudes: [
+    {
+      icon: Heart,
+      title: "接纳所有快乐",
+      description: "感官的低级快乐和探索自我的高级快乐并不冲突，在追求高级快乐时也可以享受感官快乐",
+      details: [
+        "躺下休息和学习新技术都是有价值的快乐",
+        "避免过度比较不同快乐的价值",
+        "珍惜当下的每种快乐体验"
+      ],
+      color: "bg-pink-500",
+    },
+    {
+      icon: Brain,
+      title: "积极视角",
+      description: "停止思考'我不想要什么'，转而关注'我想要什么'",
+      details: [
+        "关注事物让你快乐的部分",
+        "寻找内心真正渴望的事物",
+        "把被迫的任务看作机会"
+      ],
+      color: "bg-purple-500",
+    },
+    {
+      icon: Target,
+      title: "主动选择",
+      description: "在不同类型的快乐之间做出明智的选择，但不必过分纠结",
+      details: [
+        "思考选择背后真正想要的是什么",
+        "不同时期可以有不同的选择",
+        "接纳并享受自己的选择"
+      ],
+      color: "bg-blue-500",
+    }
+  ]
+};
+
 export default function HappinessPage() {
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -316,6 +356,46 @@ export default function HappinessPage() {
               <p className="text-sm text-muted-foreground italic">
                 {mechanism.solution}
               </p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* 新增快乐态度部分 */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="rounded-xl border bg-card p-6"
+      >
+        <h2 className="text-xl font-semibold mb-4">{happinessAttitudes.title}</h2>
+        <p className="text-muted-foreground mb-6">{happinessAttitudes.description}</p>
+        <div className="grid gap-6 md:grid-cols-3">
+          {happinessAttitudes.attitudes.map((attitude, index) => (
+            <motion.div
+              key={attitude.title}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 + index * 0.1 }}
+              className="flex flex-col gap-4 rounded-lg border p-4"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`rounded-full p-2 ${attitude.color} bg-opacity-10`}>
+                  <attitude.icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-medium">{attitude.title}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                {attitude.description}
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-2">
+                {attitude.details.map((detail, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-muted-foreground" />
+                    {detail}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
