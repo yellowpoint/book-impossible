@@ -28,6 +28,7 @@ import {
   Heart,
   Leaf,
   Compass,
+  Battery
 } from "lucide-react";
 import { usePathname } from "next/navigation"
 
@@ -193,6 +194,11 @@ export const data = {
       title: "其他",
       icon: MoreHorizontal,
       items: [
+        {
+          title: "职业倦怠",
+          url: "/burnout",
+          icon: Battery,
+        },
         {
           title: "有意义的工作",
           url: "/meaningful-work",
