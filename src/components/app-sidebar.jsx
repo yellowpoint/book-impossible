@@ -213,6 +213,11 @@ export const data = {
           title: "人生不必太用力",
           url: "/flow/not-too-hard",
           icon: Leaf,
+        },
+        {
+          title: "人生设计",
+          url: "/life-design",
+          icon: Compass,
         }
       ],
     },
