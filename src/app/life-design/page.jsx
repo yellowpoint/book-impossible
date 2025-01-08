@@ -1,393 +1,231 @@
 "use client";
 
-import { Brain, Heart, Target, AlertCircle, Lightbulb, History, Filter, Users, ArrowUpRight, Compass, Globe } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Map,
+  Compass,
+  Target,
+  Brain,
+  Users,
+  Lightbulb,
+  Heart,
+  Crosshair,
+  Sparkles,
+} from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const bookInfo = {
-  title: "斯坦福大学人生设计课",
-  meta: {
-    author: "Bill Burnett / Dave Evans",
-    publisher: "中信出版社",
-    date: "2023-06-25",
-    status: "阅读中",
-    tags: ["人生设计", "职业规划"],
-    recommendation: "来自海诗的推荐: https://mp.weixin.qq.com/s/jt2crjP3WMBQOkj4f1INhQ"
-  }
+const journeyMap = {
+  title: "人生设计",
+  description: "通过设计思维探索和迭代,找到属于自己的人生道路",
+  stages: [
+    {
+      title: "分析现状",
+      subtitle: "了解你在哪里",
+      icon: Compass,
+      content: [
+        {
+          subtitle: "人生仪表盘",
+          text: "评估四个维度的满意度：\n- 健康：身心状态\n- 工作：参与的人类探险活动\n- 娱乐：纯粹的快乐追求\n- 爱：与他人的情感联结",
+          highlight: true
+        },
+        {
+          subtitle: "发现真实问题",
+          text: `避免在错误的问题上浪费时间。不要纠结于无法改变的"重力问题"，专注于可以付诸行动的问题。`
+        },
+        {
+          text: "人生设计是为了改进完善当前的生活，而不是重新设计一种全新的生活。",
+          emphasis: true
+        }
+      ],
+      color: "bg-blue-500",
+    },
+    {
+      title: "价值观探索",
+      subtitle: "确认你的方向",
+      icon: Brain,
+      content: [
+        {
+          subtitle: "工作观",
+          text: "思考以下问题：\n- 工作对你意味着什么？\n- 为什么要工作？\n- 什么是好工作？\n- 工作与个人成长的关系？",
+          highlight: true
+        },
+        {
+          subtitle: "人生观",
+          text: "探索核心议题：\n- 生活的意义和目的\n- 与他人的关系\n- 善恶的定义\n- 快乐与痛苦的作用"
+        },
+        {
+          text: `当你清楚"你是谁，你信仰什么，你正在做什么"三者之间的联系，就能知道自己是否在正确的轨道上。`,
+          emphasis: true
+        }
+      ],
+      color: "bg-purple-500",
+    },
+    {
+      title: "能量地图",
+      subtitle: "发现你的动力",
+      icon: Map,
+      content: [
+        {
+          subtitle: "思维地图",
+          text: "通过词汇联想扩展可能性：\n- 列出感兴趣的关键词\n- 进行3-5分钟快速联想\n- 寻找词汇间的意外连接",
+          highlight: true
+        },
+        {
+          subtitle: "能量追踪",
+          text: "记录并分析：\n- 让你全身心投入的时刻\n- 充满能量的活动\n- 消耗精力的情境"
+        },
+        {
+          text: "通过思维发散和能量追踪,找到隐藏的机会和方向。",
+          emphasis: true
+        }
+      ],
+      color: "bg-yellow-500",
+    },
+    {
+      title: "方案设计",
+      subtitle: "探索多种可能",
+      icon: Target,
+      content: [
+        {
+          subtitle: "三个版本的五年计划",
+          text: "设计三个真正不同的人生方案：\n1. 当前路径 - 你已经在做的事\n2. 备选方案 - 如果无法继续当前工作\n3. 狂想方案 - 不考虑金钱和形象的理想生活",
+          highlight: true
+        },
+        {
+          text: "这不是同一个主题的三个版本，而是真正不同的生活选择。每个都应该是可能实现的计划A。"
+        },
+        {
+          text: "不要等待完美方案出现，重要的是拥有多个可能性。",
+          emphasis: true
+        }
+      ],
+      color: "bg-green-500",
+    },
+    {
+      title: "原型测试",
+      subtitle: "小规模尝试",
+      icon: Sparkles,
+      content: [
+        {
+          subtitle: "人生采访",
+          text: "与已经在理想道路上的人交流：\n- 了解他们的日常生活\n- 倾听职业发展历程\n- 获取实用建议",
+          highlight: true
+        },
+        {
+          subtitle: "实地体验",
+          text: "在投入前进行测试：\n- 一天观摩体验\n- 短期义务尝试\n- 三个月实习计划"
+        },
+        {
+          text: "就像买车要试驾一样，改变人生也需要先进行体验。",
+          emphasis: true
+        }
+      ],
+      color: "bg-red-500",
+    },
+    {
+      title: "决策执行",
+      subtitle: "明智地选择",
+      icon: Users,
+      content: [
+        {
+          subtitle: "四步决策法",
+          text: "1. 收集和创建选项\n2. 缩小列表范围\n3. 深入体验每个选择\n4. 放手继续前进",
+          highlight: true
+        },
+        {
+          subtitle: "体验式决策",
+          text: "对每个选项进行1-3天的生活体验，让身心都参与决策过程。休息1-2天后尝试下一个选项。"
+        },
+        {
+          text: "记录决策过程，当感到困惑时回顾当初的选择理由。选择后就要放手，专注于当下。",
+          emphasis: true
+        }
+      ],
+      color: "bg-pink-500",
+    }
+  ]
 };
 
-const designSteps = [
-  {
-    id: 1,
-    title: "了解自己",
-    icon: Brain,
-    sections: [
-      {
-        title: "仪表盘",
-        subtitle: "健康/工作/娱乐/爱",
-        content: [
-          {
-            category: "工作",
-            satisfaction: 4,
-            status: "之前主业是前端开发，现在待业，以及周末兼职带带户外队...",
-            problems: "如何找到热爱的工作？"
-          },
-          {
-            category: "娱乐",
-            satisfaction: 3,
-            status: "看电影、玩游戏没之前那么投入放松了，和朋友聚会、户外还不错",
-            problems: "如何找回放肆投入的感觉？"
-          },
-          {
-            category: "爱",
-            satisfaction: 1,
-            status: "大多是一个人",
-            problems: ""
-          },
-          {
-            category: "健康",
-            satisfaction: 6,
-            status: "身体经常运动还行吧就是小肥了些，心理现在主要是焦虑迷茫...",
-            problems: "减肥锻炼，心理如何更平稳？"
-          }
-        ]
-      },
-      {
-        title: "指南针",
-        subtitle: "工作观与人生观",
-        content: {
-          workView: {
-            title: "工作观",
-            questions: [
-              {
-                question: "为什么工作？",
-                answer: "为了赚钱生存，为了实现自我的价值，为了看上去是符合社会主流的正常人，为了安全感"
-              },
-              {
-                question: "工作意味着什么？",
-                answer: "意味着有明确目标、有规律生活、有外界反馈"
-              },
-              // ... 更多工作观问题
-            ]
-          },
-          lifeView: {
-            title: "人生观",
-            questions: [
-              {
-                question: "我为什么在这里？",
-                answer: "不知道，一路闭着眼被拉或被推到了这里，被鞭子抽到这"
-              },
-              {
-                question: "生活的意义或者目的是什么？",
-                answer: "当下的幸福"
-              }
-              // ... 更多人生观问题
-            ]
-          }
-        }
-      },
-      {
-        title: "人生日志",
-        subtitle: "记录活动投入度与能量",
-        content: {
-          activities: [
-            {
-              date: "2023-06-25",
-              items: [
-                {
-                  time: "早上",
-                  name: "处理群里问题",
-                  engagement: 6,
-                  energy: -5,
-                  notes: "聊天为啥会让我有压力，不知道说什么，怕没说好"
-                },
-                {
-                  time: "中午",
-                  name: "打游戏",
-                  engagement: 9,
-                  energy: -4
-                },
-                {
-                  time: "晚上",
-                  name: "朋友聚餐",
-                  engagement: 10,
-                  energy: 9
-                }
-                // ... 更多活动
-              ]
-            }
-          ],
-          patterns: [
-            "线上沟通容易耗能，面对面交流反而充满能量",
-            "创造性活动和明确目标的任务更容易投入",
-            "户外运动和社交活动能带来正向能量"
-          ]
-        }
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "探索可能性",
-    icon: Compass,
-    sections: [
-      {
-        title: "词汇联想",
-        subtitle: "根据关键词进行多层联想",
-        content: {
-          keywords: ["户外", "编程", "创造", "探索", "自由"],
-          mindMap: {
-            center: "人生方向",
-            branches: [
-              {
-                key: "户外探索",
-                connections: ["旅行", "带队", "露营", "摄影"]
-              },
-              {
-                key: "技术创造",
-                connections: ["编程", "独立开发", "工具设计"]
-              },
-              {
-                key: "心理成长",
-                connections: ["正念", "冥想", "心理学"]
-              }
-            ]
-          }
-        }
-      },
-      {
-        title: "人生计划",
-        subtitle: "设想三种五年计划",
-        content: [
-          {
-            title: "继续现有路线",
-            description: "技术发展路线",
-            timeline: [
-              {
-                year: 1,
-                goals: [
-                  "在中小公司工作,积累经验",
-                  "准备大厂面试",
-                  "开始做个人项目"
-                ]
-              },
-              // ... 更多年份
-            ],
-            evaluation: {
-              resources: 70,
-              likeability: 60,
-              confidence: 80,
-              coherence: 75
-            }
-          },
-          {
-            title: "转型路线",
-            description: "户外探索+技术结合",
-            timeline: [
-              {
-                year: 1,
-                goals: [
-                  "找个轻松的远程技术工作",
-                  "发展户外带队业务",
-                  "开发户外相关工具"
-                ]
-              }
-            ],
-            evaluation: {
-              resources: 50,
-              likeability: 85,
-              confidence: 60,
-              coherence: 70
-            }
-          }
-          // ... 第三个方案
-        ]
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: "了解世界",
-    icon: Globe,
-    sections: [
-      {
-        title: "人生采访",
-        subtitle: "采访正在过向往生活的人",
-        content: {
-          interviews: [
-            {
-              person: "汪海诗",
-              role: "内容创作者",
-              questions: [
-                {
-                  q: "现在的热爱是什么？",
-                  a: "目前来说我很喜欢做内容 因为我很喜欢思考和表达 无论是文字 视频 舞蹈 都是我向世界的表达方式"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        title: "原型体验",
-        subtitle: "体验30%的向往生活",
-        content: {
-          experiments: [
-            {
-              title: "远程工作+户外探索",
-              duration: "2周",
-              activities: [
-                "找个咖啡馆远程办公",
-                "周末带队徒步",
-                "开发户外小工具"
-              ],
-              reflections: [
-                "工作节奏更自由",
-                "能量更充沛",
-                "但需要更好的时间管理"
-              ]
-            }
-          ]
-        }
-      }
-    ]
-  }
-];
-
-export default function LifeDesign() {
+export default function LifeDesignPage() {
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">{bookInfo.title}</h1>
-        <div className="mt-2 text-gray-600">
-          <p>作者: {bookInfo.meta.author}</p>
-          <p>出版: {bookInfo.meta.publisher}</p>
-          <p>日期: {bookInfo.meta.date}</p>
-        </div>
-      </div>
+    <div className="container mx-auto p-6 space-y-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-4"
+      >
+        <h1 className="text-4xl font-bold">{journeyMap.title}</h1>
+        <p className="text-muted-foreground">{journeyMap.description}</p>
+      </motion.div>
 
-      {designSteps?.map((step) => (
-        <section key={step.id} className="mb-16">
-          <div className="flex items-center gap-2 mb-6">
-            {step.icon && <step.icon className="w-6 h-6" />}
-            <h2 className="text-2xl font-semibold">{step.title}</h2>
-          </div>
-
-          {step.sections?.map((section, index) => (
-            <div key={index} className="mb-8">
-              <h3 className="text-xl font-medium mb-4">
-                {section.title}
-                {section.subtitle && (
-                  <span className="text-gray-500 text-base ml-2">
-                    {section.subtitle}
-                  </span>
-                )}
-              </h3>
-
-              {/* 仪表盘部分 */}
-              {section.title === "仪表盘" && section.content && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {section.content.map((item, i) => (
-                    <div key={i} className="border rounded-lg p-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <h4 className="text-lg font-medium">{item.category}</h4>
-                        <span className="text-2xl font-bold">
-                          {item.satisfaction}/10
-                        </span>
-                      </div>
-                      <p className="text-gray-600 mb-2">{item.status}</p>
-                      {item.problems && (
-                        <p className="text-red-600">待解决: {item.problems}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* 指南针部分 */}
-              {section.title === "指南针" && section.content && (
-                <div className="space-y-4">
-                  {section.content.workView && (
-                    <div className="border rounded-lg p-4">
-                      <h4 className="font-medium mb-4">{section.content.workView.title}</h4>
-                      <div className="space-y-3">
-                        {section.content.workView.questions?.map((q, i) => (
-                          <div key={i}>
-                            <p className="font-medium text-gray-700">{q.question}</p>
-                            <p className="text-gray-600 pl-4">{q.answer}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {section.content.lifeView && (
-                    <div className="border rounded-lg p-4">
-                      <h4 className="font-medium mb-4">{section.content.lifeView.title}</h4>
-                      <div className="space-y-3">
-                        {section.content.lifeView.questions?.map((q, i) => (
-                          <div key={i}>
-                            <p className="font-medium text-gray-700">{q.question}</p>
-                            <p className="text-gray-600 pl-4">{q.answer}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* 人生日志部分 */}
-              {section.title === "人生日志" && section.content && (
-                <div className="space-y-6">
-                  {section.content.activities?.map((day, i) => (
-                    <div key={i} className="border rounded-lg p-4">
-                      <h4 className="font-medium mb-4">{day.date}</h4>
-                      <div className="space-y-3">
-                        {day.items?.map((item, j) => (
-                          <div key={j} className="flex justify-between items-start">
-                            <div>
-                              <span className="text-gray-500">{item.time}</span>
-                              <p className="font-medium">{item.name}</p>
-                              {item.notes && (
-                                <p className="text-gray-600 text-sm">{item.notes}</p>
-                              )}
-                            </div>
-                            <div className="text-right">
-                              <div>投入度: {item.engagement}</div>
-                              <div className={item.energy >= 0 ? "text-green-600" : "text-red-600"}>
-                                能量: {item.energy}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                  {section.content.patterns && (
-                    <div className="border rounded-lg p-4">
-                      <h4 className="font-medium mb-4">规律发现</h4>
-                      <ul className="list-disc list-inside space-y-2">
-                        {section.content.patterns.map((pattern, i) => (
-                          <li key={i} className="text-gray-700">{pattern}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )}
-
-            </div>
+      <Tabs defaultValue="chapter-1" className="w-full">
+        <TabsList className="grid grid-cols-6 h-auto">
+          {journeyMap.stages.map((stage, index) => (
+            <TabsTrigger
+              key={`chapter-${index + 1}`}
+              value={`chapter-${index + 1}`}
+              className="flex flex-col items-center gap-2 p-4 data-[state=active]:bg-primary/10"
+            >
+              <div className={`rounded-full p-2 ${stage.color} bg-opacity-10`}>
+                <stage.icon className="h-5 w-5" />
+              </div>
+              <div className="text-center">
+                <div className="text-sm font-medium">{stage.title}</div>
+                <div className="text-xs text-muted-foreground">{stage.subtitle}</div>
+              </div>
+            </TabsTrigger>
           ))}
-        </section>
-      ))}
+        </TabsList>
+
+        {journeyMap.stages.map((stage, index) => (
+          <TabsContent
+            key={`chapter-${index + 1}`}
+            value={`chapter-${index + 1}`}
+            className="mt-6"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="rounded-xl border bg-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className={`rounded-full p-3 ${stage.color} bg-opacity-10`}>
+                  <stage.icon className="h-6 w-6" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-semibold">{stage.title}</h2>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {stage.content.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="space-y-2"
+                  >
+                    {item.subtitle && (
+                      <h3 className="text-lg font-medium text-primary">
+                        {item.subtitle}
+                      </h3>
+                    )}
+                    <p className={`
+                      ${item.highlight ? 'text-xl font-medium' : 'text-muted-foreground'}
+                      ${item.emphasis ? 'italic text-lg' : ''}
+                      whitespace-pre-line
+                    `}>
+                      {item.text}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
-}
-
-// 添加辅助函数用于计算思维导图分支位置
-function getBranchPosition(index, total) {
-  const angle = (360 / total) * index;
-  const radius = 160; // 可以调整以改变分支到中心的距离
-  const x = Math.cos((angle * Math.PI) / 180) * radius;
-  const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-  return `transform translate-x-[${x}px] translate-y-[${y}px]`;
 } 
