@@ -218,6 +218,11 @@ export const data = {
           title: "人生设计",
           url: "/life-design",
           icon: Compass,
+        },
+        {
+          title: "我的人生设计",
+          url: "/my-life-design",
+          icon: Target,
         }
       ],
     },
