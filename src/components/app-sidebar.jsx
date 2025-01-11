@@ -191,6 +191,17 @@ export const data = {
       ],
     },
     {
+      title: "中国哲学",
+      icon: BookOpen,
+      items: [
+        {
+          title: "阳明心学",
+          url: "/philosophy/yangming",
+          icon: Compass,
+        },
+      ],
+    },
+    {
       title: "其他",
       icon: MoreHorizontal,
       items: [
