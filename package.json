@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^1.0.5",
+    "@excalidraw/excalidraw": "^0.17.6",
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^5.10.2",
     "@radix-ui/react-avatar": "^1.1.1",
