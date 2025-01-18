@@ -5,7 +5,7 @@ export const crossingImpossible = {
     language: "zh-CN",
   },
   elements: [
-    // 中心主题
+    // 中心主题矩形
     {
       id: "center",
       type: "rectangle",
@@ -18,12 +18,23 @@ export const crossingImpossible = {
       fillStyle: "solid",
       strokeWidth: 2,
       roundness: { type: 3 },
+    },
+    // 中心主题文本
+    {
+      id: "center-text",
+      type: "text",
+      x: 410,
+      y: 220,
+      width: 100,
+      height: 25,
       text: "跨越不可能",
       fontSize: 20,
+      fontFamily: 1,
       textAlign: "center",
       verticalAlign: "middle",
+      containerId: "center",
     },
-    // 学习力分支
+    // 学习力椭圆
     {
       id: "learning",
       type: "ellipse",
@@ -35,12 +46,23 @@ export const crossingImpossible = {
       strokeColor: "#4682B4",
       fillStyle: "solid",
       strokeWidth: 2,
+    },
+    // 学习力文本
+    {
+      id: "learning-text",
+      type: "text",
+      x: 220,
+      y: 115,
+      width: 60,
+      height: 25,
       text: "学习力",
       fontSize: 16,
+      fontFamily: 1,
       textAlign: "center",
       verticalAlign: "middle",
+      containerId: "learning",
     },
-    // 创造力分支
+    // 创造力椭圆
     {
       id: "creativity",
       type: "ellipse",
@@ -52,12 +74,23 @@ export const crossingImpossible = {
       backgroundColor: "#98FB98",
       fillStyle: "solid",
       strokeWidth: 2,
+    },
+    // 创造力文本
+    {
+      id: "creativity-text",
+      type: "text",
+      x: 620,
+      y: 115,
+      width: 60,
+      height: 25,
       text: "创造力",
       fontSize: 16,
+      fontFamily: 1,
       textAlign: "center",
       verticalAlign: "middle",
+      containerId: "creativity",
     },
-    // 心流分支
+    // 心流椭圆
     {
       id: "flow",
       type: "ellipse",
@@ -69,12 +102,23 @@ export const crossingImpossible = {
       backgroundColor: "#DDA0DD",
       fillStyle: "solid",
       strokeWidth: 2,
+    },
+    // 心流文本
+    {
+      id: "flow-text",
+      type: "text",
+      x: 220,
+      y: 315,
+      width: 60,
+      height: 25,
       text: "心流",
       fontSize: 16,
+      fontFamily: 1,
       textAlign: "center",
       verticalAlign: "middle",
+      containerId: "flow",
     },
-    // 动机分支
+    // 动机椭圆
     {
       id: "motivation",
       type: "ellipse",
@@ -86,10 +130,21 @@ export const crossingImpossible = {
       backgroundColor: "#F0E68C",
       fillStyle: "solid",
       strokeWidth: 2,
+    },
+    // 动机文本
+    {
+      id: "motivation-text",
+      type: "text",
+      x: 620,
+      y: 315,
+      width: 60,
+      height: 25,
       text: "动机",
       fontSize: 16,
+      fontFamily: 1,
       textAlign: "center",
       verticalAlign: "middle",
+      containerId: "motivation",
     },
     // 连接线
     {
