@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { WordCloud } from "@/components/word-cloud";
-import { VisualNotes } from "@/components/visual-notes";
 
 export default function HomePage() {
   return (
@@ -27,16 +26,6 @@ export default function HomePage() {
       >
         <h2 className="text-xl font-semibold mb-4">核心概念</h2>
         <WordCloud />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="rounded-xl border bg-card p-6"
-      >
-        <h2 className="text-xl font-semibold mb-4">视觉笔记</h2>
-        <VisualNotes />
       </motion.div>
 
       <motion.div

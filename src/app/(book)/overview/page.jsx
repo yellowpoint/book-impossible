@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Brain, Flame, Lightbulb, Target } from "lucide-react";
-
+import { VisualNotes } from "@/components/visual-notes";
 const abilities = [
   {
     icon: Target,
@@ -58,11 +58,20 @@ export default function OverviewPage() {
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, }}
+        className="rounded-xl border bg-card p-6"
+      >
+        <h2 className="text-xl font-semibold mb-4">视觉笔记</h2>
+        <VisualNotes />
+      </motion.div>
       <motion.h1
         className="text-3xl font-bold"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
       >
         能力关系概览
       </motion.h1>
