@@ -150,11 +150,11 @@ export const crossingImpossible = {
     {
       id: "arrow-learning",
       type: "arrow",
-      x: 460,
-      y: 230,
+      x: 400,
+      y: 200,
       points: [
         [0, 0],
-        [-160, -100],
+        [-100, -70],
       ],
       strokeColor: "#4682B4",
       strokeWidth: 2,
@@ -172,17 +172,17 @@ export const crossingImpossible = {
     {
       id: "arrow-creativity",
       type: "arrow",
-      x: 460,
-      y: 230,
+      x: 520,
+      y: 200,
       points: [
         [0, 0],
-        [140, -100],
+        [80, -70],
       ],
       strokeColor: "#228B22",
       strokeWidth: 2,
       startBinding: {
         elementId: "center",
-        focus: -0.5,
+        focus: 0.5,
         gap: 1
       },
       endBinding: {
@@ -194,11 +194,11 @@ export const crossingImpossible = {
     {
       id: "arrow-flow",
       type: "arrow",
-      x: 460,
-      y: 230,
+      x: 400,
+      y: 260,
       points: [
         [0, 0],
-        [-160, 100],
+        [-100, 70],
       ],
       strokeColor: "#8B008B",
       strokeWidth: 2,
@@ -216,17 +216,17 @@ export const crossingImpossible = {
     {
       id: "arrow-motivation",
       type: "arrow",
-      x: 460,
-      y: 230,
+      x: 520,
+      y: 260,
       points: [
         [0, 0],
-        [140, 100],
+        [80, 70],
       ],
       strokeColor: "#DAA520",
       strokeWidth: 2,
       startBinding: {
         elementId: "center",
-        focus: -0.5,
+        focus: 0.5,
         gap: 1
       },
       endBinding: {

@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Edit, Eye } from "lucide-react";
 import { crossingImpossible } from "@/config/visual-notes/crossing-impossible";
 
+// 在组件外部创建一个变量来存储 root 实例
+let root = null;
+
 export function VisualNotes({ config = crossingImpossible }) {
   const [mounted, setMounted] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
@@ -46,9 +49,23 @@ export function VisualNotes({ config = crossingImpossible }) {
       };
 
       const excalidrawWrapper = document.getElementById("excalidraw-container");
-      const root = ReactDOM.createRoot(excalidrawWrapper);
+
+      // 如果 root 不存在，才创建新的 root
+      if (!root) {
+        root = ReactDOM.createRoot(excalidrawWrapper);
+      }
+
+      // 使用现有的 root 进行渲染
       root.render(React.createElement(App));
     }
+
+    // 清理函数
+    return () => {
+      if (root) {
+        root.unmount();
+        root = null;
+      }
+    };
   }, [mounted, isEditable, config]);
 
   useEffect(() => {
