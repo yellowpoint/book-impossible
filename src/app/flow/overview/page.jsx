@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Brain, Heart, Target, Compass } from "lucide-react";
 import Image from "next/image";
+import { VisualNotes } from "@/components/visual-notes";
+import { flowSystem } from "@/config/visual-notes/flow-system";
 
 const flowElements = [
   {
@@ -74,6 +76,17 @@ export default function FlowOverviewPage() {
             通过理解和掌控意识，找到适合的目标，进入心流状态，最终达到持续的快乐。
           </p>
         </div>
+
+        {/* 添加视觉笔记组件 */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="rounded-xl border bg-card p-6"
+        >
+          <h2 className="text-xl font-semibold mb-4">系统概览</h2>
+          <VisualNotes config={flowSystem} />
+        </motion.div>
 
         {/* 中心图形和卡片布局 */}
         <div className="relative mx-auto aspect-square max-w-3xl">
