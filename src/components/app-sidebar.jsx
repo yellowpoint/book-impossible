@@ -130,7 +130,8 @@ export const data = {
           title: "心流快乐",
           url: "/goals/flow-happiness",
           icon: Heart,
-        }
+        },
+
       ]
     },
     {
@@ -202,6 +203,22 @@ export const data = {
       ],
     },
     {
+      title: "快乐",
+      icon: Heart,
+      items: [
+        {
+          title: "快乐系统",
+          url: "/happy/happiness",
+          icon: Heart,
+        },
+        {
+          title: "好心情清单",
+          url: "/happy/happy-list",
+          icon: Sparkles,
+        }
+      ]
+    },
+    {
       title: "其他",
       icon: MoreHorizontal,
       items: [
@@ -215,11 +232,7 @@ export const data = {
           url: "/meaningful-work",
           icon: Briefcase,
         },
-        {
-          title: "快乐系统",
-          url: "/happiness",
-          icon: Heart,
-        },
+
         {
           title: "人生不必太用力",
           url: "/flow/not-too-hard",
