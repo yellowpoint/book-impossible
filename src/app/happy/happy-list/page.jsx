@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Heart, Sparkles, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const happyList = [
   {
@@ -28,7 +28,7 @@ const happyList = [
       "穿上新袜子或新内衣",
       "在家中感到安全和温暖",
       "整理抽屉",
-      "打开新瓶子时听到“啪”的一声",
+      `打开新瓶子时听到"啪"的一声`,
       "品尝巧克力"
     ]
   },
@@ -96,6 +96,10 @@ export default function HappyListPage() {
     const randomIndex = Math.floor(Math.random() * allItems.length);
     setHighlightedItem(allItems[randomIndex]);
   };
+
+  useEffect(() => {
+    handleRandomHighlight();
+  }, []);
 
   return (
     <div className="container mx-auto p-6">
