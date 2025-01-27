@@ -215,6 +215,11 @@ export const data = {
           title: "好心情清单",
           url: "/happy/happy-list",
           icon: Sparkles,
+        },
+        {
+          title: "多巴胺恢复",
+          url: "/happy/dopamine",
+          icon: Zap,
         }
       ]
     },
