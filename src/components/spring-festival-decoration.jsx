@@ -4,12 +4,17 @@ import { motion } from "framer-motion"
 import { Gift, Sun, Star, Moon } from "lucide-react"
 import { useCallback } from "react"
 import { triggerFirework } from "./firework"
-
+import LunarCalendar from 'lunar-calendar';
 export function SpringFestivalDecoration() {
   const onClickFirework = useCallback(() => {
     triggerFirework()
   }, [])
-
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1; // 月份从0开始，需要加1
+  const day = currentDate.getDate();
+  // 使用 lunar-calendar 转换为农历
+  const lunarDate = LunarCalendar.solarToLunar(year, month, day);
   return (
     <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 group-data-[collapsible=icon]:hidden">
       {/* 祝福语 */}
@@ -23,6 +28,7 @@ export function SpringFestivalDecoration() {
           whileTap={{ scale: 0.95 }}
         >
           蛇年大吉
+          <p>{lunarDate.lunarMonthName}{lunarDate.lunarDayName}</p>
         </motion.div>
       </motion.div>
 
