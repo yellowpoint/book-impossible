@@ -40,7 +40,7 @@ const flowElements = [
     icon: Target,
     color: "bg-blue-500",
     url: "/flow/flow-elements",
-    position: "absolute right-0 top-80",
+    position: "absolute right-0 top-60",
     highlights: [
       "全神贯注 + 自我进步",
       "明确目标、适度挑战",
@@ -78,7 +78,7 @@ export default function FlowOverviewPage() {
         </div>
 
         {/* 添加视觉笔记组件 */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -86,7 +86,7 @@ export default function FlowOverviewPage() {
         >
           <h2 className="text-xl font-semibold mb-4">系统概览</h2>
           <VisualNotes config={flowSystem} />
-        </motion.div>
+        </motion.div> */}
 
         {/* 中心图形和卡片布局 */}
         <div className="relative mx-auto aspect-square max-w-3xl">

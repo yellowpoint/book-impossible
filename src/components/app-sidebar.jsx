@@ -138,32 +138,32 @@ export const data = {
 
       ]
     },
-    {
-      title: "AI",
-      icon: Bot,
-      items: [
-        {
-          title: "AI 对话",
-          url: "/ai-chat",
-          icon: MessageSquare,
-        },
-        {
-          title: "AI Prompt",
-          url: "/ai-prompt",
-          icon: Wand2,
-        },
-        {
-          title: "AI History",
-          url: "/ai-history",
-          icon: History,
-        },
-        {
-          title: "AI Playground",
-          url: "/ai-playground",
-          icon: Gamepad2,
-        },
-      ],
-    },
+    // {
+    //   title: "AI",
+    //   icon: Bot,
+    //   items: [
+    //     {
+    //       title: "AI 对话",
+    //       url: "/ai-chat",
+    //       icon: MessageSquare,
+    //     },
+    //     {
+    //       title: "AI Prompt",
+    //       url: "/ai-prompt",
+    //       icon: Wand2,
+    //     },
+    //     {
+    //       title: "AI History",
+    //       url: "/ai-history",
+    //       icon: History,
+    //     },
+    //     {
+    //       title: "AI Playground",
+    //       url: "/ai-playground",
+    //       icon: Gamepad2,
+    //     },
+    //   ],
+    // },
     {
       title: "心流",
       icon: Activity,
@@ -195,17 +195,17 @@ export const data = {
         },
       ],
     },
-    {
-      title: "中国哲学",
-      icon: BookOpen,
-      items: [
-        {
-          title: "阳明心学",
-          url: "/philosophy/yangming",
-          icon: Compass,
-        },
-      ],
-    },
+    // {
+    //   title: "中国哲学",
+    //   icon: BookOpen,
+    //   items: [
+    //     {
+    //       title: "阳明心学",
+    //       url: "/philosophy/yangming",
+    //       icon: Compass,
+    //     },
+    //   ],
+    // },
     {
       title: "快乐",
       icon: Heart,
@@ -252,11 +252,11 @@ export const data = {
           url: "/life-design",
           icon: Compass,
         },
-        {
-          title: "我的人生设计",
-          url: "/my-life-design",
-          icon: Target,
-        }
+        // {
+        //   title: "我的人生设计",
+        //   url: "/my-life-design",
+        //   icon: Target,
+        // }
       ],
     },
   ],
@@ -300,16 +300,16 @@ export function AppSidebar({
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="relative">
+      {/* <SidebarHeader className="relative">
         <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
+      </SidebarHeader> */}
       <SidebarContent>
         <NavMain items={navMainWithActive} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter className="relative">
-        <SpringFestivalDecoration />
-        <NavUser user={data.user} />
+        {/* <SpringFestivalDecoration />
+        <NavUser user={data.user} /> */}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

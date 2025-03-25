@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Flame, Lightbulb, Target } from "lucide-react";
+import { Brain, Flame, Lightbulb, Target, Download } from "lucide-react";
 import { VisualNotes } from "@/components/visual-notes";
+import { Button } from "@/components/ui/button";
 const abilities = [
   {
     icon: Target,
@@ -58,7 +59,7 @@ export default function OverviewPage() {
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-8">
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, }}
@@ -66,7 +67,7 @@ export default function OverviewPage() {
       >
         <h2 className="text-xl font-semibold mb-4">视觉笔记</h2>
         <VisualNotes />
-      </motion.div>
+      </motion.div> */}
       <motion.h1
         className="text-3xl font-bold"
         initial={{ opacity: 0, y: -20 }}
@@ -231,6 +232,24 @@ export default function OverviewPage() {
             它们相互促进、相辅相成，共同推动个人的持续成长与发展。
           </motion.span>
         </p>
+      </motion.div>
+
+      <motion.div
+        className="mx-auto mt-8 flex justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 3.2, duration: 0.5 }}
+      >
+        <Button
+          onClick={() => {
+            // 这里添加下载epub的逻辑
+            window.location.href = "/跨越不可能 ([美]史蒂芬·科特勒) .epub";
+          }}
+          className="flex items-center gap-2"
+        >
+          <Download className="h-4 w-4" />
+          下载完整书籍 (EPUB)
+        </Button>
       </motion.div>
     </div>
   );
