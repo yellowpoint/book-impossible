@@ -81,6 +81,9 @@ export default function RootLayout({ children }) {
           })(window,document,'script','dataLayer','GTM-W2M3K74Z');`
         }} />
         {/* End Google Tag Manager */}
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3224751637649296"
+          crossOrigin="anonymous"></script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* Google Tag Manager (noscript) */}
