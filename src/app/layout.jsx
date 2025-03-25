@@ -20,16 +20,49 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "跨越不可能",
-  description: "跨越不可能",
+  title: "跨越不可能 - 探索学习、创造力与心流的交织之旅",
+  description: "跨越不可能是一个专注于个人成长、学习方法和创造力开发的平台。我们探索学习、创造力与心流的交织，帮助每个人突破自我，实现不可能。",
+  keywords: "学习, 创造力, 心流, 个人成长, 自我提升, 学习方法",
+  authors: [{ name: "跨越不可能" }],
+  creator: "跨越不可能",
+  publisher: "跨越不可能",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://book-impossible.vercel.app'),
+  openGraph: {
+    type: 'website',
+    locale: 'zh_CN',
+    url: 'https://book-impossible.vercel.app',
+    title: '跨越不可能 - 探索学习、创造力与心流的交织之旅',
+    description: '跨越不可能是一个专注于个人成长、学习方法和创造力开发的平台。我们探索学习、创造力与心流的交织，帮助每个人突破自我，实现不可能。',
+    siteName: '跨越不可能',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: '跨越不可能',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '跨越不可能 - 探索学习、创造力与心流的交织之旅',
+    description: '跨越不可能是一个专注于个人成长、学习方法和创造力开发的平台。我们探索学习、创造力与心流的交织，帮助每个人突破自我，实现不可能。',
+    images: ['/og-image.png'],
+    creator: '@book_impossible',
+  },
   icons: [
     {
       rel: "icon",
-      url: "/favicon.svg",  // 改用 SVG 格式
+      url: "/favicon.svg",
       type: "image/svg+xml"
     },
     {
-      rel: "apple-touch-icon", // 用于 iOS 设备的图标
+      rel: "apple-touch-icon",
       url: "/apple-touch-icon.png"
     }
   ],
